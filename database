@@ -1,0 +1,1124 @@
+sudo mariadb;
+
+
+
+
+show databases;
+
++--------------------+
+| Database           |
++--------------------+
+| abc                |
+| data               |
+| emp                |
+| information_schema |
+| mysql              |
+| name               |
+| new                |
+| performance_schema |
+| sys                |
++--------------------+
+9 rows in set (0.002 sec)
+
+create database: - 
+
+create database xxy;
+
+MariaDB [(none)]> use new;
+
+show tables ;
+
+create tables : - 
+
+	create table emp (emp_id int (10) , emp_name varchar (20), 
+	 emp_surname varchar(20) , emp_salary int (255) );
+
+ show tables;
++---------------+
+| Tables_in_new |
++---------------+
+| emp           |
+| stu           |
++---------------+
+2 rows in set (0.001 sec)
+
+EMP table :- 
+show columns from stu;
+show create table stu - ( dikhata he ki table create karte time kya command likhi thi )
+
+desc emp;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_id      | int(10)     | YES  |     | NULL    |       |
+| emp_name    | varchar(20) | YES  |     | NULL    |       |
+| emp_surname | varchar(20) | YES  |     | NULL    |       |
+| emp_salary  | int(255)    | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.004 sec)
+
+		Alter table :- (DML)
+add Add column
+delete column
+modifing column
+renaming column
+
+alter the structure of the tables
+
+alter table employed add column ( address varchar(10));
+# alter table emp add column address varcar(50);
+# alter table emp drop column address ;
+# alter table emp rename column doj to date;
+# alter table emp modify column int(40) ; 
+ desc employed; 
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| eid     | int(5)       | YES  |     | NULL    |       |
+| name    | varchar(200) | YES  |     | NULL    |       |
+| contact | varchar(10)  | YES  |     | NULL    |       |
+| sal     | int(5)       | YES  |     | NULL    |       |
+| address | varchar(10)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.004 sec)
+
+ADD column  :-  add - last ( by difault)
+		      first
+		      after
+
+	alter table emp add address varchar(56);
+	alter table student add column(rname varchar(10),lname varchar(10));
+	alter table student add column address varchar(20) first ; (first me column add hoga)
+	alter table stu add column address varchar(40)after id;
+Constaint name - 
+	alter table emp add column rollnumber int(40) not null add primary key (roll);
+
+table create hone ke Bad me key add karna- 
+alter table items add constraint unique key(seller_id);
+desc items;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| seller_id | int(11)     | YES  | UNI | NULL    |       |
+| name      | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.005 sec)
+ 
+
+
+Drop column :--
+drop table :-
+	drop table tablenam 
+
+	alter table employed drop column address ;
+	ALTER TABLE student DROP COLUMN rname, DROP COLUMN lname;
+
+
+Modify column : - This is used to modify size of the data type or the data type itself of an existing column without changing column name
+
+	alter table employed modify column eid int (40);
+
+
+Rename column :- 
+
+	alter table employed  rename column salary to sal;
+
+Change column : -  change name + data type 
+	
+	alter table items change column sell_id seller int ;
+
+	alter table items change column sell_id sell int , change column name fname varchar(20) ;
+
+
+
+
+INSERT VALUES :--
+
+insert into emp (emp_id ,emp_name,emp_surname,emp_salary) 
+values  (002,'dfg','gfc',300) ,(003 , 'xyz' , 'yzx',50000 ), 
+(004 , 'mpv' ,' pvm',50000);
+
+
+Show tables values:--
+
+ select * from emp;
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      1 | abc      | cba         |         50 |
+|      2 | dfg      | gfc         |        300 |
+|      3 | xyz      | yzx         |      50000 |
+|      4 | mpv      |  pvm        |      50000 |
++--------+----------+-------------+------------+
+4 rows in set (0.001 sec)
+
+
+** For emp_id print only
+select emp_id from emp;
++--------+
+| emp_id |
++--------+
+|      1 |
+|      2 |
+|      3 |
+|      4 |
+|      5 |
+|      6 |
+|      7 |
+|      8 |
++--------+
+8 rows in set (0.001 sec)
+
+** emp_name print 
+select emp_name from emp;
++----------+
+| emp_name |
++----------+
+| abc      |
+| dfg      |
+| xyz      |
+| mpv      |
+| apu      |
+| abbb     |
+| jvjv     |
+| dd       |
++----------+
+8 rows in set (0.001 sec)
+
+
+
+Delete :--
+
+	delete from employed;
+
+	delete from employed where eid=103;lkn  
+Update :--
+
+	> update employed set email="apu";
+	> update employed set sal = 400 where sal= 3000
+
+
+
+-----------------------------------------------------------------
+		NOT NULL
+
+
+create table player(id int(5), name varchar(20) not null , run int(5) ,
+email varchar(200) ,contact int(11));
+
+ desc player;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int(5)       | YES  |     | NULL    |       |
+| name    | varchar(20)  | NO   |     | NULL    |       |
+| run     | int(5)       | YES  |     | NULL    |       |
+| email   | varchar(200) | YES  |     | NULL    |       |
+| contact | int(11)      | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.001 sec)
+
+
+****LIMIT...
+
+ select * from emp limit 4;
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      1 | abc      | cba         |         50 |
+|      2 | dfg      | gfc         |        300 |
+|      3 | xyz      | yzx         |      50000 |
+|      4 | mpv      |  pvm        |      50000 |
++--------+----------+-------------+------------+
+
+
+select * from emp limit 0 , 4;
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      1 | abc      | cba         |         50 |
+|      2 | dfg      | gfc         |        300 |
+|      3 | xyz      | yzx         |      50000 |
+|      4 | mpv      |  pvm        |      50000 |
++--------+----------+-------------+------------+
+4 rows in set (0.001 sec)
+
+***USE Where...
+
+where is used to search for specific data 
+
+ select * from emp where emp_name='apu';
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      5 | apu      |  bhavsar    |     500000 |
++--------+----------+-------------+------------+
+1 row in set (0.001 sec)
+
+
+*** Not Equal to 
+
+ select * from emp where emp_name != "apu" ; (apu ko chod kar sab print hoga )
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      1 | abc      | cba         |         50 |
+|      2 | dfg      | gfc         |        300 |
+|      3 | xyz      | yzx         |      50000 |
+|      4 | mpv      |  pvm        |      50000 |
+|      6 | abbb     | yum         |      60000 |
+|      7 | jvjv     |  iucf       |      40000 |
+|      8 | dd       | yy          |      59000 |
++--------+----------+-------------+------------+
+
+
+ 
+MariaDB [new]> select * from emp where emp_salary < 300;(300 se kam )
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      1 | abc      | cba         |         50 |
++--------+----------+-------------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [new]> select * from emp where emp_salary > 300;(se jada)
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      3 | xyz      | yzx         |      50000 |
+|      4 | mpv      |  pvm        |      50000 |
+|      5 | apu      |  bhavsar    |     500000 |
+|      6 | abbb     | yum         |      60000 |
+|      7 | jvjv     |  iucf       |      40000 |
+|      8 | dd       | yy          |      59000 |
++--------+----------+-------------+------------+
+6 rows in set (0.001 sec)
+
+
+*** for null values:---
+
+select * from emp where emp_name is null;
+Empty set (0.001 sec)
+---------------------------------------------------------------------
+
+***** NOT NULL
+
+
+MariaDB [new]> select * from emp where emp_name is not null;
++--------+----------+-------------+------------+
+| emp_id | emp_name | emp_surname | emp_salary |
++--------+----------+-------------+------------+
+|      1 | abc      | cba         |         50 |
+|      2 | dfg      | gfc         |        300 |
+|      3 | xyz      | yzx         |      50000 |
+|      4 | mpv      |  pvm        |      50000 |
+|      5 | apu      |  bhavsar    |     500000 |
+|      6 | abbb     | yum         |      60000 |
+|      7 | jvjv     |  iucf       |      40000 |
+|      8 | dd       | yy          |      59000 |
++--------+----------+-------------+------------+
+8 rows in set (0.001 sec)
+
+
+...............Logical operators..................
+
+		AND- 
+
+ select * from player where id > 101  and id < 105;
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  102 | mayuri |  100 | bpurvabh@gmail.com | 7978749960 |
+|  103 | ram    |    5 | ram@gmail.com      | 837847483  |
+|  104 | rani   |    5 | rani@gmail.com     | 9171837041 |
++------+--------+------+--------------------+------------+
+3 rows in set (0.002 sec)
+
+
+ select * from player where name = "apurva" and id = 101;
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  101 | apurva |  105 | apurvabh@gmail.com | 7976749960 |
++------+--------+------+--------------------+------------+
+1 row in set (0.001 sec)
+
+
+	OR 
+ select * from player where name= "apurva" or name="mayuri";
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  101 | apurva |  105 | apurvabh@gmail.com | 7976749960 |
+|  102 | mayuri |  100 | bpurvabh@gmail.com | 7978749960 |
++------+--------+------+--------------------+------------+
+2 rows in set (0.001 sec)
+
+select * from player where id=101 or  id=105;
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  101 | apurva |  105 | apurvabh@gmail.com | 7976749960 |
+|  105 | sham   |    7 | sham@gmail.com     | 9327847483 |
++------+--------+------+--------------------+------------+
+2 rows in set (0.002 sec)
+----------------------------------------------------------------
+
+	Alias 
+aliase are used for tempprarily rename a table name or column name
+for table - select id from player as yo ; ( table ka name tem change hota )
+used to display new name of column
+select name ,id,id*12 as "annul" from player;
++--------+------+-------+
+| name   | id   | annul |
++--------+------+-------+
+| apurva |  101 |  1212 |
+| mayuri |  102 |  1224 |
+| ram    |  103 |  1236 |
+| rani   |  104 |  1248 |
+| sham   |  105 |  1260 |
++--------+------+-------+
+5 rows in set (0.001 sec)
+
+select id as "yo" from player;
++------+
+| yo   |
++------+
+|  101 |
+|  102 |
+|  103 |
+|  104 |
+|  105 |
++------+
+5 rows in set (0.001 sec)
+
+select name as "fullname", id as "ab" from player;
++----------+------+
+| fullname | ab   |
++----------+------+
+| apurva   |  101 |
+| mayuri   |  102 |
+| ram      |  103 |
+| rani     |  104 |
+| sham     |  105 |
++----------+------+
+5 rows in set (0.002 sec)
+
+
+----------------------------------------------------------
+
+	Order By ( used for shorting )
+
+Asecnding order
+descending order
+
+SELECT * FROM player ORDER BY name ASC;
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  101 | apurva |  105 | apurvabh@gmail.com | 7976749960 |
+|  102 | mayuri |  100 | bpurvabh@gmail.com | 7978749960 |
+|  103 | ram    |    5 | ram@gmail.com      | 837847483  |
+|  104 | rani   |    5 | rani@gmail.com     | 9171837041 |
+|  105 | sham   |    7 | sham@gmail.com     | 9327847483 |
++------+--------+------+--------------------+------------+
+5 rows in set (0.003 sec)
+
+ select email from player order by email asc;
+
+Descending order
+
+ select * from player  order by id desc;
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  105 | sham   |    7 | sham@gmail.com     | 9327847483 |
+|  104 | rani   |    5 | rani@gmail.com     | 9171837041 |
+|  103 | ram    |    5 | ram@gmail.com      | 837847483  |
+|  102 | mayuri |  100 | bpurvabh@gmail.com | 7978749960 |
+|  101 | apurva |  105 | apurvabh@gmail.com | 7976749960 |
++------+--------+------+--------------------+------------+
+5 rows in set (0.001 sec)
+
+
+
+-------------------------------------------------------------------------------
+
+	IN 	
+
+select * from player where id in( 101) 
+select * from player where id in ( 102 , 104);
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  102 | mayuri |  100 | bpurvabh@gmail.com | 7978749960 |
+|  104 | rani   |    5 | rani@gmail.com     | 9171837041 |
++------+--------+------+--------------------+------------+
+2 rows in set (0.001 sec)
+
+ select * from player where id not in ( 102);
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  101 | apurva |  105 | apurvabh@gmail.com | 7976749960 |
+|  103 | ram    |    5 | ram@gmail.com      | 837847483  |
+|  104 | rani   |    5 | rani@gmail.com     | 9171837041 |
+|  105 | sham   |    7 | sham@gmail.com     | 9327847483 |
++------+--------+------+--------------------+------------+
+4 rows in set (0.001 sec)
+
+select * from player where id in ( 100);
+Empty set (0.001 sec)
+
+
+
+--------------------------------------------------------------
+	Between 
+
+The between operator selects values withing a range 
+
+select * from player where id between 101 and 105 ; ( 101 ke bich 105 jo he vo print karo )
++------+--------+------+--------------------+------------+
+| id   | name   | run  | email              | contact    |
++------+--------+------+--------------------+------------+
+|  101 | apurva |  105 | apurvabh@gmail.com | 7976749960 |
+|  102 | mayuri |  100 | bpurvabh@gmail.com | 7978749960 |
+|  103 | ram    |    5 | ram@gmail.com      | 837847483  |
+|  104 | rani   |    5 | rani@gmail.com     | 9171837041 |
+|  105 | sham   |    7 | sham@gmail.com     | 9327847483 |
++------+--------+------+--------------------+------------+
+5 rows in set (0.001 sec)
+
+	NOT Between 
+
+select * from player where id not between 101 and 104 ; ( 101 and 104 ko chod kar print karta)
++------+------+------+----------------+------------+
+| id   | name | run  | email          | contact    |
++------+------+------+----------------+------------+
+|  105 | sham |    7 | sham@gmail.com | 9327847483 |
++------+------+------+----------------+------------+
+1 row in set (0.001 sec)
+
+----------------------------------------------------------------
+
+	  LIKE
+The like operator is used to search for a specified pattern in a column 
+
+
+Names that start with 's'
+SELECT * FROM player WHERE name LIKE 's%';
+
+
+Names that end with 'm'
+SELECT * FROM player WHERE name LIKE '%m';
+
+
+Names that contain 's' anywhere
+SELECT * FROM player WHERE name LIKE '%s%';
+
+
+Names that have 's' as the second character
+SELECT * FROM player WHERE name LIKE '_s%';
+
+
+Names that have 's' as the third character
+SELECT * FROM player WHERE name LIKE '__s%';
+
+select * forom player where name like '_' ;( only 4 latter values enter)
+---------------------------------------------------------------------
+	Primary key
+The primary key constraint uniquly identifies each record in a database 
+table primary key must contain unique vlaues 
+a primary key column connot contain null values
+most table should have a primary key and each table can have only one primary key 
+
+create table student ( name varchar(10) , roll int(10) not null  primary key , mobile int(11));
+desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| name   | varchar(10) | YES  |     | NULL    |       |
+| roll   | int(10)     | NO   | PRI | NULL    |       |
+| mobile | int(11)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.002 sec)
+----------------------------------------------------------------------------
+	Auto increment
+is used to generate an unique number when a new record is inserted into a table
+
+auto_increment
+create table timepass (id int(10) primary key auto_incremnt, name varchar(2));
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [yo]> desc timepass;
++-------+------------+------+-----+---------+----------------+
+| Field | Type       | Null | Key | Default | Extra          |
++-------+------------+------+-----+---------+----------------+
+| id    | int(10)    | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(2) | YES  |     | NULL    |                |
++-------+------------+------+-----+---------+----------------+
+2 rows in set (0.004 sec)
+
+ insert into timepass ( name) values("rr");
+ select * from timepass;
++-----+------+
+| id  | name |
++-----+------+
+| 101 | ab   |
+| 102 | kp   |
+| 103 | kf   |
+| 104 | rr   |
++-----+------+
+
+ alter table stu auto_increment = 101;
+Query OK, 0 rows affected (0.029 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [yo]> select * from stu;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | apurva |
++----+--------+
+1 row in set (0.002 sec)
+
+MariaDB [yo]> insert into stu (name) values("apu");
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [yo]> select * from stu;
++-----+--------+
+| id  | name   |
++-----+--------+
+|   1 | apurva |
+| 101 | apu    |
++-----+--------+
+2 rows in set (0.001 sec)
+
+-------------------------------------------------------------------------
+
+	Distinct
+the used to display only different values
+
+ select * from stu;
++-----+--------+
+| id  | name   |
++-----+--------+
+|   1 | apurva |
+| 101 | apu    |
+| 102 | apurva |
++-----+--------+
+3 rows in set (0.001 sec)
+
+ select distinct name from stu;
++--------+
+| name   |
++--------+
+| apurva |
+| apu    |
++--------+
+2 rows in set (0.001 sec)
+
+------------------------------------------------------------------
+	Truncate
+When we only want to delete the data inside the table 
+truncate table table_name ;
+
+---------------------------------------------------------------
+	Copy old table to new table
+Within same database
+
+create table new_table like old_table ;
+insert new_table select * from old_table
+
+Within diffrent databases
+ create database new;
+ create table new_table like yo.stu;(yo - database , stu - old table)
+ insert new_table select * from yo.stu;
+----------------------------------------------------------------------------
+
+Fuction 
+
+MIN - smallest value of the selected column 
+
+ select min(id) from new_table;
+select min(id) as new from new_table;
++---------+
+| min(id) |
++---------+
+|       1 |
++---------+
+
+MAX - Largest value of the selected column 
+ 
+	select max(id) from new_table;
+
+SUM - The total sum of  a numeric column
+	
+	select id ,sqrt(id) from new_table;
+
+AVG - The average of a numeric column
+	
+	select id ,sqrt(id) from new_table;
+
+SQRT - The squre root of a numeric
+
+	select id ,sqrt(id) from new_table;
+
+ROUND - function is used to round a numerical field the number of decimals specified
+
+	 select * , round (price , 1)from product;
+
+
+--------------------------------------------------------------------
+	Decimal 
+column name decimal(T , D)
+T = total digits range 1 - 65
+D = digits after decimal 0 - 30 
+price decimal (4 ,2) - 44.22 
+
+Data size 
+number of bytes  no of digit
+0			0
+1			1-2
+2			3-4
+3			5-6
+4			7-9
+
+
+ create table product ( id int auto_increment primary key ,pname varchar(10) ,price decimal ( 7 , 2)zerofill not null );
+
+
+ insert into product (pname , price) values("cpu",70222.22),("computer",30034.22);
+ select * from product;
++----+----------+----------+
+| id | pname    | price    |
++----+----------+----------+
+|  1 | cpu      | 70222.22 |
+|  2 | computer | 30034.22 |
++----+----------+----------+
+
+
+select * from info  LIMIT 2 OFFSET 4;
++--------+---------+------+--------+--------+
+| srs_nu | Name    | Age  | Gender | city   |
++--------+---------+------+--------+--------+
+|      5 | Khushi  |   23 | Female | Nagpur |
+|      6 | Neetika |   29 | Female | Bhilai |
++--------+---------+------+--------+--------+
+
+----------------------------------------------------------------------
+	Count
+
+MariaDB [st]> select count(*) from info;
++----------+
+| count(*) |
++----------+
+|       12 |
++----------+
+1 row in set (0.001 sec)
+
+Diffrence coulumn ki count karega 
+ select count(distinct name) from info;
++----------------------+
+| count(distinct name) |
++----------------------+
+|                   12 |
++----------------------+
+
+
+----------------------------------------------------------------------------
+	NOw(current datetime)
+
+ select name , no ,now() as datetime from info;
++------------+----+---------------------+
+| name       | no | datetime            |
++------------+----+---------------------+
+| Apurva     |  1 | 2024-07-05 23:42:34 |
+| Hema       |  2 | 2024-07-05 23:42:34 |
+| Sarita     |  3 | 2024-07-05 23:42:34 |
+| Bhagyshree |  4 | 2024-07-05 23:42:34 |
+| Khushi     |  5 | 2024-07-05 23:42:34 |
+| Neetika    |  6 | 2024-07-05 23:42:34 |
+| Rutuja     |  7 | 2024-07-05 23:42:34 |
+| Addish     |  8 | 2024-07-05 23:42:34 |
+| Rishi      |  9 | 2024-07-05 23:42:34 |
+| Muskan     | 10 | 2024-07-05 23:42:34 |
+| Sayli      | 11 | 2024-07-05 23:42:34 |
+| mayuri     | 12 | 2024-07-05 23:42:34 |
++------------+----+---------------------+
+12 rows in set (0.000 sec)
+
+------------------------------------------------------------------------
+	Group By 
+select name , min(no) from info group by name;
+jo do name same hoge jinme se mini nikal ke print karegega ; 
+
+ select age ,sum(name) from info group by age ;
++------+-----------+
+| age  | sum(name) |
++------+-----------+
+|   22 |         0 |
+|   23 |         0 |
+|   24 |         0 |
+|   25 |         0 |
+|   27 |         0 |
+|   29 |         0 |
+|   34 |         0 |
++------+-----------+
+7 rows in set, 12 warnings (0.002 sec)
+
+
+
+ select mode , sum(pay)as total from payment  group by mode order by total asc ;
++------------+-------+
+| mode       | total |
++------------+-------+
+| Netbanking |  3880 |
+| Debitcard  |  4302 |
+| phonepay   |  5458 |
+| Cash       | 10000 |
++------------+-------+
+4 rows in set (0.001 sec)
+
+---------------------------------------------------------------------------------------------
+			Composite key 
+
+CREATE TABLE student (
+    coursecode VARCHAR(100),
+    date DATE,
+    cname VARCHAR(20),
+    seat INT(10),
+    remain INT(30),
+    room INT(10),
+    Rcapa INT(20),
+    PRIMARY KEY (coursecode, date) *** multiple primary key 
+);
+
+
+ desc student;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| coursecode | varchar(100) | NO   | PRI | NULL    |       |
+| date       | date         | NO   | PRI | NULL    |       |
+| cname      | varchar(20)  | YES  |     | NULL    |       |
+| seat       | int(10)      | YES  |     | NULL    |       |
+| remain     | int(30)      | YES  |     | NULL    |       |
+| room       | int(10)      | YES  |     | NULL    |       |
+| Rcapa      | int(20)      | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.004 sec)
+=============================================================================================
+
+
+		Foregin key
+
+ CREATE TABLE department (
+    ->     D_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->     D_name varchar(10),
+    ->     E_id int(11),
+    ->     FOREIGN KEY (E_id) REFERENCES employee(emp_id)
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [st]> desc department;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| D_id   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| D_name | varchar(10) | YES  |     | NULL    |                |
+| E_id   | int(11)     | YES  | MUL | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+3 rows in set (0.004 sec)
+
+Delete foreign key............................
+
+See the constaints name and delete the foregin key ............
+
+ select * from information_schema.table_constraints where table_name = "student";
+
+ alter table student drop foreign key emp_eid_fk (constaints name ) ;
+
+
+Add foreign key
+add constraint emp_eid_fk foreign key(city) references city(id);   
+
+alter table student add column table_name table_type , add constraint name foreign key(tablename) references city(id);  
+
+
+
+
+
+-------------------------------------------
+
+	Concat
+
+select concat (emp_id , FirstName) from Employees;
++-----------------------------+
+| concat (emp_id , FirstName) |
++-----------------------------+
+| 1John                       |
+| 2Jane                       |
+| 3Bob                        |
+| 4Alice                      |
+| 5Mike                       |
++-----------------------------+
+5 rows in set (0.001 sec)
+
+ Unknown column 'EmployeeID' in 'field list'
+MariaDB [product]> SELECT CONCAT(emp_id, ' ', FirstName) FROM Employees;
++--------------------------------+
+| CONCAT(emp_id, ' ', FirstName) |
++--------------------------------+
+| 1 John                         |
+| 2 Jane                         |
+| 3 Bob                          |
+| 4 Alice                        |
+| 5 Mike                         |
++--------------------------------+
+5 rows in set (0.001 sec)
+
+
+--------------------------------------------------------------------------------------------
+
+		Aggregate functions
+
+
+count - The record of total number of the rows
+ select count(price) from pro;
+
+sum - Return the total number of sum 
+ select sum(price) from pro;
+
+avg - This returns the average salary of all employees.
+select avg (price) from pro ; 
+
+Min - This returns the smallest salary in the employees table.
+SELECT MIN(salary) FROM employees;
+
+Max - This returns the highest salary in the employees table.
+SELECT MAX(salary) FROM employees;
+
+
+ select * from payment;
++------+------------+---------+
+| id   | mode       | payment |
++------+------------+---------+
+|    1 | cash       |   20000 |
+|    2 | netbanking |   40000 |
+|    3 | cash       |   10000 |
+|    4 | netbanking |    4000 |
++------+------------+---------+
+4 rows in set (0.001 sec)
+
+MariaDB [product]> select mode ,sum(payment) from payment group by mode ;
++------------+--------------+
+| mode       | sum(payment) |
++------------+--------------+
+| cash       |        30000 |
+| netbanking |        44000 |
++------------+--------------+
+2 rows in set (0.001 sec)
+
+
+====================================================================================
+
+			HAVING CLAUSE
+
+The having clause is use to apply a filter on the result of group by based on the specified condition 
+
+
+select mode , count(payment) as total from payment group by mode having count(payment) = 3;
++------+-------+
+| mode | total |
++------+-------+ 
+| cash |     3 |
++------+-------+
+1 row in set (0.001 sec)
+
+=============================================================================================
+			TIME
+
+SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2024-08-23 18:35:04 |
++---------------------+
+1 row in set (0.000 sec)
+
+
+ SELECT CURRENT_DATE;
++--------------+
+| CURRENT_DATE |
++--------------+
+| 2024-08-23   |
++--------------+
+1 row in set (0.001 sec)
+
+
+ SELECT CURRENT_TIME;
++--------------+
+| CURRENT_TIME |
++--------------+
+| 18:34:30     |
++--------------+
+
+
+
+
+		EXTRACT FUNCTIONS
+
+ select  extract(year from date_added) as year,date_added from pro;
++------+------------+
+| year | date_added |
++------+------------+
+| 2024 | 2024-08-12 |
+| 2024 | 2024-08-12 |
+| 2024 | 2024-08-12 |
+| 2024 | 2024-09-02 |
+| 2024 | 2024-08-15 |
+| 2024 | 2024-09-02 |
+| 2024 | 2024-08-23 |
++------+------------+
+7 rows in set (0.001 sec)
+
+SELECT DAYOFWEEK(date_added) AS dow, date_added FROM pro;
++------+------------+
+| dow  | date_added |
++------+------------+
+|    2 | 2024-08-12 |
+|    2 | 2024-08-12 |
+|    2 | 2024-08-12 |
+|    2 | 2024-09-02 |
+|    5 | 2024-08-15 |
+|    2 | 2024-09-02 |
+|    6 | 2024-08-23 |
++------+------------+
+7 rows in set (0.001 sec)
+
+=========================================================================================
+		string function
+
+
+Select upper(column_name) from tablename ;
+select lower(column_name) from tablename ;
+
+		Length
+ select length(pro_N) , pro_N from pro ;
++---------------+--------+
+| length(pro_N) | pro_N  |
++---------------+--------+
+|             6 | laptop |
+|             2 | Tv     |
+|             6 | remote |
+|             2 | ac     |
+|             6 | remote |
+|             2 | ac     |
+|             6 | remote |
++---------------+--------+
+7 rows in set (0.001 sec)
+
+		Substring
+
+ select substring(pro_N,1,3 ) , pro_N from pro ;
++-----------------------+--------+
+| substring(pro_N,1,3 ) | pro_N  |
++-----------------------+--------+
+| lap                   | laptop |
+| Tv                    | Tv     |
+| rem                   | remote |
+| ac                    | ac     |
+| rem                   | remote |
+| ac                    | ac     |
+| rem                   | remote |
++-----------------------+--------+
+
+		Concat
+ select concat(id, " ", pro_N) as concat from pro;
++-------------+
+| concat      |
++-------------+
+| 1001 laptop |
+| 1002 Tv     |
+| 1003 remote |
+| 1004 ac     |
+| 1005 remote |
+| 1007 ac     |
+| 1008 remote |
++-------------+
+
+	replace 
+
+ select replace(pro_N , "ac" , "ab")  from pro;
++------------------------------+
+| replace(pro_N , "ac" , "ab") |
++------------------------------+
+| laptop                       |
+| Tv                           |
+| remote                       |
+| ab                           |
+| remote                       |
+| ab                           |
+| remote                       |
++------------------------------+
+7 rows in set (0.001 sec)
+
+=============================================================================================
+
+			Joins
+
+
+
+
+An INNER JOIN is a type of SQL join that returns only the rows that have a match in both tables. It's the most common type of join and is used to combine rows from two tables where the join condition is met.An INNER JOIN is a type of SQL join that returns only the rows that have a match in both tables. It's the most common type of join and is used to combine rows from two tables where the join condition is met.
+
+
+
+SELECT column1, column2
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;SELECT column1, column2
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+select * from cust join cust_odd on cust.cid=cust_odd.o_id ;
+
+
+-------------------------------------------------------------------------------------
+
+LEFT JOIN: A Comprehensive Guide
+
+A LEFT JOIN is a type of SQL join that returns all records from the left table and the matching records from the right table. If there's no match, the result will contain NULL values.
+
+
+SELECT column1, column2
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+select * from cust left join cust_odd on cust.cid = cust_odd.o_id ;
+
+
+----------------------------------------------------------------------------------
+
+RIGHT JOIN: A Detailed Explanation
+
+A RIGHT JOIN is a type of SQL join that returns all records from the right table and the matching records from the left table. If there's no match, the result will contain NULL values.RIGHT JOIN: A Detailed Explanation
+
+
+
+SELECT column1, column2
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;SELECT column1, column2
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
+
+ select * from cust right join cust_odd on cust.cid = cust_odd.o_id ;
+
+
+-------------------------------------------------------------------------------------
+
+
